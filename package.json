@@ -9,20 +9,20 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@webgpu/types": "^0.1.40",
-    "eslint": "^9.1.1",
-    "eslint-config-prettier": "^9.1.0",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^7.8.0",
-    "vite": "^5.2.11",
-    "vite-plugin-static-copy": "^1.0.4"
+    "@webgpu/types": "^0.1.58",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.27.0",
+    "vite": "^6.2.2",
+    "vite-plugin-static-copy": "^2.3.0"
   },
   "dependencies": {
-    "@codemirror/language": "^6.10.1",
+    "@codemirror/language": "^6.11.0",
     "@iizukak/codemirror-lang-wgsl": "^0.3.0",
-    "@lezer/highlight": "^1.2.0",
-    "@shoelace-style/shoelace": "^2.15.0",
+    "@lezer/highlight": "^1.2.1",
+    "@shoelace-style/shoelace": "^2.20.1",
     "style-mod": "^4.1.2",
-    "wgsl-linker": "^0.4.1"
+    "wgsl-linker": "0.5.0-d1"
   }
 }
