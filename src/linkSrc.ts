@@ -1,16 +1,13 @@
-import { ModuleRegistry } from "wgsl-linker";
-
-const wgsl: Record<string, string> = import.meta.glob("./*.wgsl", {
-  query: "?raw",
-  eager: true,
-  import: "default",
-});
+/// <reference types="wesl-plugin/suffixes" />
+import { link } from "wesl";
+import main from "../shaders/main.wgsl?link";
 
 /** Link demo wgsl src
  *
  * @return linked code
  */
-export function linkDemoSrc(): string {
-  const registry = new ModuleRegistry({ wgsl });
-  return registry.link("main");
+export async function linkDemoSrc(): Promise<string> {
+  console.log(main);
+  const linked = await link(main);
+  return linked.dest;
 }

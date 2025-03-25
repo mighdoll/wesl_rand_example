@@ -3,16 +3,15 @@ export interface Drawable {
   stopped: boolean;
 }
 
-
-/** 
- * Create a simple rendering shader 
- * 
+/**
+ * Create a simple rendering shader
+ *
  * @param code should have two entry points: vertexMain and fragmentMain
  *   The uniform buffer will be passed a single u32 containging the frame number
- * @param canvasContext the shader will render to the provided output texture 
- * 
+ * @param canvasContext the shader will render to the provided output texture
+ *
  * @returns an object containing a draw() function to trigger gpu rendering.
-*/
+ */
 export async function simpleRenderShader(
   device: GPUDevice,
   canvasContext: GPUCanvasContext,
@@ -20,6 +19,7 @@ export async function simpleRenderShader(
 ): Promise<Drawable> {
   let frameNumber = 0;
 
+  console.log(code);
   const shaderModule = device.createShaderModule({ code });
 
   const bindGroupLayout = device.createBindGroupLayout({
@@ -71,7 +71,6 @@ export async function simpleRenderShader(
   });
 
   const uniformData = new ArrayBuffer(uniformBufferSize);
-
 
   function draw(): void {
     const view = new DataView(uniformData);

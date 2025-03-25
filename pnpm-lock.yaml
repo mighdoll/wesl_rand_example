@@ -20,12 +20,15 @@ importers:
       '@shoelace-style/shoelace':
         specifier: ^2.20.1
         version: 2.20.1(@floating-ui/utils@0.2.9)(@types/react@19.0.12)
+      random_wgsl:
+        specifier: 0.6.0-rc3
+        version: 0.6.0-rc3
       style-mod:
         specifier: ^4.1.2
         version: 4.1.2
-      wgsl-linker:
-        specifier: 0.5.0-d1
-        version: 0.5.0-d1
+      wesl:
+        specifier: 0.6.0-rc3
+        version: 0.6.0-rc3
     devDependencies:
       '@webgpu/types':
         specifier: ^0.1.58
@@ -48,6 +51,9 @@ importers:
       vite-plugin-static-copy:
         specifier: ^2.3.0
         version: 2.3.0(vite@6.2.2)
+      wesl-plugin:
+        specifier: 0.6.0-rc3
+        version: 0.6.0-rc3(esbuild@0.25.1)(vite@6.2.2)
 
 packages:
 
@@ -727,6 +733,9 @@ packages:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
     engines: {node: '>=6'}
 
+  import-meta-resolve@4.1.0:
+    resolution: {integrity: sha512-I6fiaX09Xivtk+THaMfAwnA3MVA5Big1WHF1Dfx9hFuvNIWpXnorlkzhcQf6ehrqQiiZECRt1poOAkPmer3ruw==}
+
   imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
@@ -797,8 +806,8 @@ packages:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
 
-  mini-parse@0.5.0-d1:
-    resolution: {integrity: sha512-GUvTOf7STaWdqaOdAAsRxGVv3K6SRQQxlGaArTzfa9+Kj7nuId2S9klfqnk6HgXxSKq/xwTY/HmEG8Qrrt3EcQ==}
+  mini-parse@0.6.0-rc3:
+    resolution: {integrity: sha512-ocuxAvEaAX4/95V8qpaZxfJO+ZC1/7IB24flNPtEWMBbcf/TGZsQcL5ueFeSPBprkL1vGYFIUTAVnX/aGS3wAg==}
 
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -875,6 +884,9 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  random_wgsl@0.6.0-rc3:
+    resolution: {integrity: sha512-E5zmRewkleUUIA1r/fmjig+MTS625mWoZduGJT8V7LTtZtzQx6jFKeVmuOhC6gdYiwugdZljuKWQs7NEEPAO/Q==}
+
   readdirp@3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
@@ -927,6 +939,9 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
+  toml@3.0.0:
+    resolution: {integrity: sha512-y/mWCZinnvxjTKYhJ+pYxwD0mRLVvOtdS2Awbgxln6iEnt4rk0yBxeSBHkGJcPucRiG0e55mwWp+g/05rsrd6w==}
+
   ts-api-utils@2.1.0:
     resolution: {integrity: sha512-CUgTZL1irw8u29bzrOD/nH85jqyc74D6SshFgujOIA7osm2Rz7dYH77agkx7H4FBNxDq7Cjf+IjaX/8zwFW+ZQ==}
     engines: {node: '>=18.12'}
@@ -952,6 +967,10 @@ packages:
   universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
+
+  unplugin@2.2.2:
+    resolution: {integrity: sha512-Qp+iiD+qCRnUek+nDoYvtWX7tfnYyXsrOnJ452FRTgOyKmTM7TUJ3l+PLPJOOWPTUyKISKp4isC5JJPSXUjGgw==}
+    engines: {node: '>=18.12.0'}
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
@@ -1005,8 +1024,37 @@ packages:
   w3c-keyname@2.2.8:
     resolution: {integrity: sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==}
 
-  wgsl-linker@0.5.0-d1:
-    resolution: {integrity: sha512-V3cLfZYPfFkSN0be/zVfrWrpoTSpvMJmyzLbDyUy/Dk1wlaQf6ysQ37j2IU5spCI6tCT3mzaiJiHeRbEKwoa9Q==}
+  webpack-virtual-modules@0.6.2:
+    resolution: {integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==}
+
+  wesl-plugin@0.6.0-rc3:
+    resolution: {integrity: sha512-YKMy43nMluDKMfJex79jyH7p+ph2zC0UcSkKVMixxlR0W3ZbBt1XS+ADqfLR9D2RUbrc9nZBwmKnU5DudKO3PA==}
+    peerDependencies:
+      '@farmfe/core': '>=1'
+      '@nuxt/kit': ^3
+      '@nuxt/schema': ^3
+      esbuild: '*'
+      rollup: ^3
+      vite: '>=3'
+      webpack: ^4 || ^5
+    peerDependenciesMeta:
+      '@farmfe/core':
+        optional: true
+      '@nuxt/kit':
+        optional: true
+      '@nuxt/schema':
+        optional: true
+      esbuild:
+        optional: true
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+
+  wesl@0.6.0-rc3:
+    resolution: {integrity: sha512-xJxWP7UbHcUEBZDROQjoAcpSv/5wqlSB2CR5n8GcAKrflToQqQrYInb++Qh/6OLmKC28mmzqO4j1iHz91hQlDQ==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -1690,6 +1738,8 @@ snapshots:
       parent-module: 1.0.1
       resolve-from: 4.0.0
 
+  import-meta-resolve@4.1.0: {}
+
   imurmurhash@0.1.4: {}
 
   is-binary-path@2.1.0:
@@ -1760,7 +1810,7 @@ snapshots:
       braces: 3.0.3
       picomatch: 2.3.1
 
-  mini-parse@0.5.0-d1: {}
+  mini-parse@0.6.0-rc3: {}
 
   minimatch@3.1.2:
     dependencies:
@@ -1823,6 +1873,8 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
+  random_wgsl@0.6.0-rc3: {}
+
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.1
@@ -1883,6 +1935,8 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
+  toml@3.0.0: {}
+
   ts-api-utils@2.1.0(typescript@5.8.2):
     dependencies:
       typescript: 5.8.2
@@ -1904,6 +1958,11 @@ snapshots:
   typescript@5.8.2: {}
 
   universalify@2.0.1: {}
+
+  unplugin@2.2.2:
+    dependencies:
+      acorn: 8.14.1
+      webpack-virtual-modules: 0.6.2
 
   uri-js@4.4.1:
     dependencies:
@@ -1928,9 +1987,21 @@ snapshots:
 
   w3c-keyname@2.2.8: {}
 
-  wgsl-linker@0.5.0-d1:
+  webpack-virtual-modules@0.6.2: {}
+
+  wesl-plugin@0.6.0-rc3(esbuild@0.25.1)(vite@6.2.2):
     dependencies:
-      mini-parse: 0.5.0-d1
+      import-meta-resolve: 4.1.0
+      toml: 3.0.0
+      unplugin: 2.2.2
+      wesl: 0.6.0-rc3
+    optionalDependencies:
+      esbuild: 0.25.1
+      vite: 6.2.2
+
+  wesl@0.6.0-rc3:
+    dependencies:
+      mini-parse: 0.6.0-rc3
 
   which@2.0.2:
     dependencies:

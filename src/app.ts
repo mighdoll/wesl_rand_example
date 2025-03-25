@@ -10,7 +10,7 @@ export async function startApp(
   stopButton: HTMLButtonElement,
   srcPanel: HTMLDivElement
 ): Promise<void> {
-  const linked = linkDemoSrc();
+  const linked = await linkDemoSrc();
   const drawable = await setupRenderer(canvas, linked);
 
   srcPanel.innerHTML = makeSrcPanel(exampleSrc(), linked);

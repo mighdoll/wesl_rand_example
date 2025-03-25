@@ -1,5 +1,5 @@
-import src from "./main.wgsl?raw";
-import utilWgsl from "./util.wgsl?raw";
+import src from "../shaders/main.wgsl?raw";
+import utilWgsl from "../shaders/util.wgsl?raw";
 
 /** collect src code for demo display */
 export function exampleSrc(): Record<string, string> {
