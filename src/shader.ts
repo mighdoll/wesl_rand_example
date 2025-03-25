@@ -19,7 +19,6 @@ export async function simpleRenderShader(
 ): Promise<Drawable> {
   let frameNumber = 0;
 
-  console.log(code);
   const shaderModule = device.createShaderModule({ code });
 
   const bindGroupLayout = device.createBindGroupLayout({
