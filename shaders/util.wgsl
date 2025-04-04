@@ -1,14 +1,5 @@
-// #module demo.util
-
-// demo for struct inheritance
-// #export
-struct HasColor {
-    color: vec4f, 
-}
-
 // PCG pseudo random generator from vec2u to vec4f
 // the random output is in the range from zero to 1
-// #export
 fn pcg_2u_3f(pos: vec2u) -> vec3f {
     let seed = mix2to3(pos);
     let random = pcg_3u_3u(seed);
@@ -18,7 +9,6 @@ fn pcg_2u_3f(pos: vec2u) -> vec3f {
 
 // PCG random generator from vec3u to vec3u
 // adapted from http://www.jcgt.org/published/0009/03/02/
-// #export 
 fn pcg_3u_3u(seed: vec3u) -> vec3u {
     var v = seed * 1664525u + 1013904223u;
 
@@ -49,8 +39,3 @@ fn mix2to3(p: vec2u) -> vec3u {
     );
     return seed;
 }
-
-
-// #if typecheck 
-fn ldexp(v: vec3f, p: vec3i) -> vec3u { return vec3u(0u); }
-// #endif
