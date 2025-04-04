@@ -1,8 +1,4 @@
-
-export interface Drawable {
-  draw(): void;
-  stopped: boolean;
-}
+import { Drawable } from "./drawable.ts";
 
 /**
  * Create a simple rendering shader
@@ -98,5 +94,5 @@ export async function simpleRenderShader(
 
     device.queue.submit([commandEncoder.finish()]);
   }
-  return { draw, stopped: true };
+  return { draw };
 }

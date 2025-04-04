@@ -1,14 +1,13 @@
 /// <reference types="wesl-plugin/suffixes" />
 import { wgslToDom } from "./highlight.ts";
-import {
-  Drawable,
-  simpleRenderShader,
-} from "./shader.ts";
+import { simpleRenderShader } from "./shader.ts";
 import { SlIconButton } from "@shoelace-style/shoelace";
 import { link } from "wesl";
 import rand from "random_wgsl";
 import main from "../shaders/main.wgsl?link";
 import { configureCanvas, gpuDevice } from "./gpuUtil.ts";
+import { Loopable } from "./drawable.ts";
+import { mapKeys } from "./util.ts";
 
 /** Wire up the html UI and install the demo WebGPU shader */
 export async function startApp(
@@ -19,20 +18,14 @@ export async function startApp(
   const device = await gpuDevice();
   const linked = await link(main);
   const shaderModule = linked.createShaderModule(device, {});
-  const drawable = await setupRenderer(device, canvas, shaderModule);
+  const animation = await setupRenderer(device, canvas, shaderModule);
 
-  const r = mapKeys(rand.modules, (s) => "random_wgsl/" + s);
-  srcPanel.innerHTML = makeSrcPanel({ ...main.weslSrc, ...r }, linked.dest);
+  const randFiles = mapKeys(rand.modules, (s) => "random_wgsl/" + s);
+  const srcs = { ...main.weslSrc, ...randFiles };
+  srcPanel.innerHTML = makeSrcPanel(srcs, linked.dest);
 
-  const buttonHandler = playPauseHandler(drawable);
+  const buttonHandler = playPauseHandler(animation);
   stopButton.addEventListener("click", buttonHandler);
-
-  drawable.draw();
-}
-
-function mapKeys(o: Record<string, any>, fn: (s: string) => string): typeof o {
-  const newEntries = Object.entries(o).map(([k, v]) => [fn(k), v]);
-  return Object.fromEntries(newEntries);
 }
 
 /** @return setup a gpu renderer to run the gpu demo */
@@ -40,14 +33,14 @@ async function setupRenderer(
   device: GPUDevice,
   canvas: HTMLCanvasElement,
   shaderModule: GPUShaderModule
-): Promise<Drawable> {
+): Promise<Loopable> {
   const canvasContext = configureCanvas(device, canvas, true);
   const drawable = await simpleRenderShader(
     device,
     canvasContext,
     shaderModule
   );
-  return drawable;
+  return new Loopable(drawable, false);
 }
 
 /** @return html for the tabs that display the source code */
@@ -79,22 +72,11 @@ ${wgslToDom(src)}
 
 type ButtonClickListener = (this: HTMLButtonElement, evt: MouseEvent) => void;
 
-function playPauseHandler(drawable: Drawable): ButtonClickListener {
+function playPauseHandler(loopable: Loopable): ButtonClickListener {
   return function buttonHandler(e: MouseEvent): void {
-    const stopped = !drawable.stopped;
-    drawable.stopped = stopped;
+    const running = !loopable.running; // get the current looping state
+    loopable.run(running);
     const button = e.target as SlIconButton;
-    button.name = stopped ? "play" : "pause";
-    if (!stopped) drawLoop(drawable);
+    button.name = running ? "pause" : "play";
   };
-}
-
-function drawLoop(drawable: Drawable): void {
-  drawRepeat();
-
-  function drawRepeat(): void {
-    if (drawable.stopped) return;
-    drawable.draw();
-    requestAnimationFrame(drawRepeat);
-  }
 }
