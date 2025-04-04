@@ -26,5 +26,5 @@ fn fragmentMain(@builtin(position) pos: vec4f) -> @location(0) vec4f {
 }
 
 
-// to show linker resolving name conflict - util.wgsl also has a fn named 'mixing' 
+// to show linker resolving name conflict - random_wgsl also has a fn named 'mixing' 
 fn mixing() { }
