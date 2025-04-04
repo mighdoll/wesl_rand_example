@@ -22,7 +22,7 @@ fn vertexMain(@builtin(vertex_index) vertex_index: u32) -> @builtin(position) ve
 fn fragmentMain(@builtin(position) pos: vec4f) -> @location(0) vec4f {
     mixing();
     let rand = random_wgsl::pcg_2u_3f(vec2u(pos.xy) + u.frame);
-    return vec4(rand, 1f);
+    return vec4(rand, 1);
 }
 
 
