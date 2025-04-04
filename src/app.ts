@@ -1,15 +1,14 @@
 /// <reference types="wesl-plugin/suffixes" />
 import { wgslToDom } from "./highlight.ts";
 import {
-  configureCanvas,
   Drawable,
-  gpuDevice,
   simpleRenderShader,
 } from "./shader.ts";
 import { SlIconButton } from "@shoelace-style/shoelace";
 import { link } from "wesl";
 import rand from "random_wgsl";
 import main from "../shaders/main.wgsl?link";
+import { configureCanvas, gpuDevice } from "./gpuUtil.ts";
 
 /** Wire up the html UI and install the demo WebGPU shader */
 export async function startApp(
