@@ -1,8 +1,9 @@
+/// <reference types="wesl-plugin/suffixes" />
 import { wgslToDom } from "./highlight.ts";
-import { linkDemoSrc } from "./linkSrc.ts";
-import { Drawable, simpleRenderShader } from "./shader.ts";
+import { configureCanvas, Drawable, gpuDevice, simpleRenderShader } from "./shader.ts";
 import { SlIconButton } from "@shoelace-style/shoelace";
-import { exampleSrc } from "./srcExampleCode.ts";
+import { link } from "wesl";
+import main from "../shaders/main.wgsl?link";
 
 /** Wire up the html UI and install the demo WebGPU shader */
 export async function startApp(
@@ -10,10 +11,12 @@ export async function startApp(
   stopButton: HTMLButtonElement,
   srcPanel: HTMLDivElement
 ): Promise<void> {
-  const linked = await linkDemoSrc();
-  const drawable = await setupRenderer(canvas, linked);
+  const device = await gpuDevice();
+  const linked = await link(main);
+  const shaderModule = linked.createShaderModule(device, {})
+  const drawable = await setupRenderer(device, canvas, shaderModule);
 
-  srcPanel.innerHTML = makeSrcPanel(exampleSrc(), linked);
+  srcPanel.innerHTML = makeSrcPanel(main.weslSrc, linked.dest);
 
   const buttonHandler = playPauseHandler(drawable);
   stopButton.addEventListener("click", buttonHandler);
@@ -23,22 +26,12 @@ export async function startApp(
 
 /** @return setup a gpu renderer to run the gpu demo */
 async function setupRenderer(
+  device: GPUDevice,
   canvas: HTMLCanvasElement,
-  code: string
+  shaderModule: GPUShaderModule
 ): Promise<Drawable> {
-  const gpu = navigator.gpu;
-  if (!gpu) {
-    console.error("No GPU found, try chrome, or firefox on windows");
-    throw new Error("no GPU");
-  }
-  const adapter = await gpu.requestAdapter();
-  if (!adapter) {
-    console.error("No gpu adapter found");
-    throw new Error("no GPU adapter");
-  }
-  const device = await adapter.requestDevice();
   const canvasContext = configureCanvas(device, canvas, true);
-  const drawable = await simpleRenderShader(device, canvasContext, code);
+  const drawable = await simpleRenderShader(device, canvasContext, shaderModule);
   return drawable;
 }
 
@@ -89,28 +82,4 @@ function drawLoop(drawable: Drawable): void {
     drawable.draw();
     requestAnimationFrame(drawRepeat);
   }
-}
-
-/** configure the webgpu canvas context for typical webgpu use */
-export function configureCanvas(
-  device: GPUDevice,
-  canvas: HTMLCanvasElement,
-  debug = false
-): GPUCanvasContext {
-  const context = canvas.getContext("webgpu");
-  if (!context) {
-    throw new Error("no WebGPU context available");
-  }
-  let usage = GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.COPY_DST;
-  if (debug) {
-    usage |= GPUTextureUsage.COPY_SRC;
-  }
-  context.configure({
-    device,
-    alphaMode: "opaque",
-    format: navigator.gpu.getPreferredCanvasFormat(),
-    usage: usage,
-  });
-
-  return context;
 }
