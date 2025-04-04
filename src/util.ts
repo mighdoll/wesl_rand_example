@@ -1,4 +1,6 @@
-
+/**
+ * @return a copy of an object, rewriting the keys using a provided function.
+ */
 export function mapKeys(
   o: Record<string, any>,
   fn: (s: string) => string
