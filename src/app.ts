@@ -1,5 +1,5 @@
 /// <reference types="wesl-plugin/suffixes" />
-import { wgslToDom } from "./highlight.ts";
+import { wgslToHTML } from "./highlight.ts";
 import { simpleRenderShader } from "./shader.ts";
 import { SlIconButton } from "@shoelace-style/shoelace";
 import { link } from "wesl";
@@ -55,7 +55,7 @@ function makeSrcPanel(modules: Record<string, string>, linked: string): string {
       ([name, src]) => `
       <sl-tab-panel name="${name}">
         <pre>
-${wgslToDom(src)}
+${wgslToHTML(src)}
         </pre>
       </sl-tab-panel>`
     )

@@ -4,7 +4,7 @@ import { Drawable } from "./drawable.ts";
  * Create a simple rendering shader
  *
  * @param code should have two entry points: vertexMain and fragmentMain
- *   The uniform buffer will be passed a single u32 containging the frame number
+ *   The uniform buffer will be passed a single u32 containing the frame number
  * @param canvasContext the shader will render to the provided output texture
  *
  * @returns an object containing a draw() function to trigger gpu rendering.

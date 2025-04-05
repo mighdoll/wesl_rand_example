@@ -11,7 +11,8 @@ function escape(text: string) {
   return div.innerHTML;
 }
 
-export function wgslToDom(code: string): string {
+/** pretty print wgsl into html */
+export function wgslToHTML(code: string): string {
   let dom = "";
   let last = 0;
   highlightTree(

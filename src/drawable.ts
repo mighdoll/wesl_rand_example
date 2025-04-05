@@ -13,7 +13,9 @@ export class Loopable {
     this.drawRepeat();
   }
 
-  get running(): boolean { return this.looping; }
+  get running(): boolean {
+    return this.looping;
+  }
 
   run(value: boolean) {
     if (value === this.looping) return;
