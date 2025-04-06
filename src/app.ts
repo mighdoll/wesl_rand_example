@@ -1,13 +1,13 @@
 /// <reference types="wesl-plugin/suffixes" />
-import { wgslToHTML } from "./highlight.ts";
-import { simpleRenderShader } from "./shader.ts";
 import { SlIconButton } from "@shoelace-style/shoelace";
-import { link } from "wesl";
 import rand from "random_wgsl";
+import { link } from "wesl";
 import main from "../shaders/main.wgsl?link";
-import { configureCanvas, gpuDevice } from "./gpuUtil.ts";
 import { Loopable } from "./drawable.ts";
+import { gpuDevice } from "./gpuUtil.ts";
+import { wgslToHTML } from "./highlight.ts";
 import { mapKeys } from "./util.ts";
+import { gpuAnimation } from "./shader.ts";
 
 /** Wire up the html UI and install the demo WebGPU shader */
 export async function startApp(
@@ -18,7 +18,7 @@ export async function startApp(
   const device = await gpuDevice();
   const linked = await link(main);
   const shaderModule = linked.createShaderModule(device, {});
-  const animation = await setupRenderer(device, canvas, shaderModule);
+  const animation = await gpuAnimation(device, canvas, shaderModule);
 
   const randFiles = mapKeys(rand.modules, (s) => "random_wgsl/" + s);
   const srcs = { ...main.weslSrc, ...randFiles };
@@ -26,21 +26,6 @@ export async function startApp(
 
   const buttonHandler = playPauseHandler(animation);
   stopButton.addEventListener("click", buttonHandler);
-}
-
-/** @return setup a gpu renderer to run the gpu demo */
-async function setupRenderer(
-  device: GPUDevice,
-  canvas: HTMLCanvasElement,
-  shaderModule: GPUShaderModule
-): Promise<Loopable> {
-  const canvasContext = configureCanvas(device, canvas, true);
-  const drawable = await simpleRenderShader(
-    device,
-    canvasContext,
-    shaderModule
-  );
-  return new Loopable(drawable, false);
 }
 
 /** @return html for the tabs that display the source code */

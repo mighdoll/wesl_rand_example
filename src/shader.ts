@@ -1,4 +1,24 @@
-import { Drawable } from "./drawable.ts";
+import { Drawable, Loopable } from "./drawable.ts";
+import { configureCanvas } from "./gpuUtil.ts";
+
+/** Setup to run a simple gpu shader, rendering into a canvas.
+ * Once started, the renderer will run continuously in an animation loop. 
+ * 
+ * @return a Loopable for start/stop control.
+*/
+export async function gpuAnimation(
+  device: GPUDevice,
+  canvas: HTMLCanvasElement,
+  shaderModule: GPUShaderModule
+): Promise<Loopable> {
+  const canvasContext = configureCanvas(device, canvas, true);
+  const drawable = await simpleRenderShader(
+    device,
+    canvasContext,
+    shaderModule
+  );
+  return new Loopable(drawable, false);
+}
 
 /**
  * Create a simple rendering shader
